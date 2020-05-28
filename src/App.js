@@ -11,6 +11,8 @@ import { FcApproval } from "react-icons/fc";
 import { FcGlobe } from "react-icons/fc";
 import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
 import Badge from 'react-bootstrap/Badge'
+import Accordion from 'react-bootstrap/Accordion'
+import Table from 'react-bootstrap/Table'
 
 
 
@@ -20,6 +22,8 @@ function App() {
   const[india,setIndia]=useState([])
   const[results,setResults]=useState([])
   const[searchStates,setSearchStates]=useState("")
+  const[districts,setDistricts]=useState([])
+  
   
 
 
@@ -27,13 +31,15 @@ function App() {
     axios
     .all([
     axios.get("https://disease.sh/v2/all"),
-    axios.get("https://api.covidindiatracker.com/state_data.json"),
-    axios.get("https://disease.sh/v2/countries/india")
+    axios.get("https://api.covid19india.org/data.json"),
+    axios.get("https://disease.sh/v2/countries/india"),
+    axios.get("https://api.covid19india.org/state_district_wise.json")
     ])
         .then(responseArr=>{
-          setLatest(responseArr[0].data);
-          setResults(responseArr[1].data)
+          setLatest(responseArr[0].data)
+          setResults(responseArr[1].data.statewise)
           setIndia(responseArr[2].data)
+          console.log(responseArr[3].data)
 
         })
         .catch(err=>{
@@ -46,10 +52,15 @@ function App() {
   const lastUpdated=date.toString();
 
   const filterStates = results.filter(item=>{
-    return searchStates !== "" ? item.state.includes(searchStates) : item
+    return searchStates !== "" ? item.state.toLowerCase().includes(searchStates.toLowerCase()) : item
   })
 
   const states= filterStates.map((data,i)=>{
+    if(data.state === "Total"){ 
+      return null;
+  }
+  else{
+      
     return(
       <Card
       border="secondary"
@@ -57,18 +68,47 @@ function App() {
       bg="dark"
        text="light"
       className="text-center"
-      style={{ margin: "12px" }}
+      style={{ margin: "8px" }}
     >
-      
+      <Accordion >
+  <Card >
+    <Accordion.Toggle as={Card.Header} eventKey="0" >
+      <b style={{color:"black"}}>{data.state}</b>
+    </Accordion.Toggle>
+    <Accordion.Collapse eventKey="0">
+    <Table striped bordered hover size="sm" responsive style={{ margin: "0px",padding:"0px" }}><small>
+  <thead>
+    <tr>
+      <th>Dist</th>
+      <th>active</th>
+      <th>confirmed</th>
+      <th>deaths</th>
+      <th>recovered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <tr></tr>
+      <td>comming</td>
+      <td>soon</td>
+      <td>!!</td>
+      <td></td>
+    </tr>
+  </tbody>
+</small></Table>
+    </Accordion.Collapse>
+  </Card>
+  </Accordion>
       <Card.Body>
-      <Card.Header><b>{data.state}</b></Card.Header>
-    <Card.Text><Badge pill variant="primary">{data.aChanges}</Badge><b>Active: </b>{data.active}</Card.Text>
-      <Card.Text><Badge pill variant="warning">{data.cChanges}</Badge><b>Confirmed: </b>{data.confirmed}</Card.Text>
-      <Card.Text><Badge pill variant="danger">{data.dChanges}</Badge><b>Deceased: </b>{data.deaths}</Card.Text>
-      <Card.Text><Badge pill variant="success">{data.rChanges}</Badge><b>Recovered: </b>{data.recovered}</Card.Text>
+        
+      
+    <Card.Text><b>Active: </b>{data.active}</Card.Text>
+      <Card.Text><Badge pill variant="primary"><small>^{data.deltaconfirmed}</small></Badge><b>Confirmed: </b>{data.confirmed}</Card.Text>
+      <Card.Text><b>Deceased: </b>{data.deaths}</Card.Text>
+      <Card.Text><b>Recovered: </b>{data.recovered}</Card.Text>
       </Card.Body>
     </Card>
-    )
+    )}
   })
 
   var queries = [{
@@ -76,10 +116,10 @@ function App() {
     query: 'min-width: 400px'
   }, {
     columns: 3,
-    query: 'min-width: 750px'
+    query: 'min-width: 870px'
   },{
-    columns: 5,
-    query: 'min-width: 1000px'
+    columns: 3,
+    query: 'min-width: 1100px'
   }];
 
 
@@ -131,7 +171,7 @@ function App() {
       bg="secondary"
        text="light"
       className="text-center"
-      style={{ margin: "12px" }}
+      style={{ margin: "8px" }}
     >
       
       
