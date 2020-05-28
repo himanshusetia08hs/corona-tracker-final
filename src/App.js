@@ -89,7 +89,7 @@ function App() {
   <tbody>
     <tr>
       <tr></tr>
-      <td>comming</td>
+      <td>coming</td>
       <td>soon</td>
       <td>!!</td>
       <td></td>
