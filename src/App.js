@@ -87,7 +87,7 @@ function App() {
   <Card bg="warning" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.cases}</Card.Title>
-  <Card.Title><b>IN{' '}</b>{india.cases}</Card.Title>
+  <Card.Title ><b  style={{color:"black"}}>IN{' '}</b>{india.cases}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Cases</b>
@@ -96,7 +96,7 @@ function App() {
   <Card bg="danger" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.deaths}</Card.Title>
-      <Card.Title><b>IN{' '}</b>{india.deaths}</Card.Title>
+      <Card.Title><b  style={{color:"black"}}>IN{' '}</b>{india.deaths}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Deceased</b>
@@ -105,7 +105,7 @@ function App() {
   <Card bg="success" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.recovered}</Card.Title>
-      <Card.Title><b>IN{' '}</b>{india.recovered}</Card.Title>
+      <Card.Title><b style={{color:"black"}}>IN{' '}</b>{india.recovered}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Recovered</b>
