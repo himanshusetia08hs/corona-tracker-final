@@ -7,8 +7,11 @@ import moment from 'moment';
 import Columns from 'react-columns'
 import Form from 'react-bootstrap/Form'
 import Navi from './components/Navi'
+import { FcApproval } from "react-icons/fc";
 import { FcGlobe } from "react-icons/fc";
-import bg from "../src/components/bg.png"
+import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
+import Badge from 'react-bootstrap/Badge'
+
 
 
 function App() {
@@ -59,10 +62,10 @@ function App() {
       
       <Card.Body>
       <Card.Header><b>{data.state}</b></Card.Header>
-      <Card.Text><b>Active: </b>{data.active}</Card.Text>
-      <Card.Text><b>Confirmed: </b>{data.confirmed}</Card.Text>
-      <Card.Text><b>Deceased: </b>{data.deaths}</Card.Text>
-      <Card.Text><b>Recovered: </b>{data.recovered}</Card.Text>
+    <Card.Text><Badge pill variant="primary">{data.aChanges}</Badge><b>Active: </b>{data.active}</Card.Text>
+      <Card.Text><Badge pill variant="warning">{data.cChanges}</Badge><b>Confirmed: </b>{data.confirmed}</Card.Text>
+      <Card.Text><Badge pill variant="danger">{data.dChanges}</Badge><b>Deceased: </b>{data.deaths}</Card.Text>
+      <Card.Text><Badge pill variant="success">{data.rChanges}</Badge><b>Recovered: </b>{data.recovered}</Card.Text>
       </Card.Body>
     </Card>
     )
@@ -87,7 +90,7 @@ function App() {
   <Card bg="warning" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.cases}</Card.Title>
-  <Card.Title ><b  style={{color:"black"}}>IN{' '}</b>{india.cases}</Card.Title>
+  <Card.Title ><b  style={{color:"black"}}>IND{' '}</b>{india.cases}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Cases</b>
@@ -96,7 +99,7 @@ function App() {
   <Card bg="danger" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.deaths}</Card.Title>
-      <Card.Title><b  style={{color:"black"}}>IN{' '}</b>{india.deaths}</Card.Title>
+      <Card.Title><b  style={{color:"black"}}>IND{' '}</b>{india.deaths}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Deceased</b>
@@ -105,7 +108,7 @@ function App() {
   <Card bg="success" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.recovered}</Card.Title>
-      <Card.Title><b style={{color:"black"}}>IN{' '}</b>{india.recovered}</Card.Title>
+      <Card.Title><b style={{color:"black"}}>IND{' '}</b>{india.recovered}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Recovered</b>
@@ -123,7 +126,18 @@ function App() {
 
   <Columns queries={queries}>{states}</Columns>
 
-
+  <Card
+      border="dark"
+      bg="secondary"
+       text="light"
+      className="text-center"
+      style={{ margin: "12px" }}
+    >
+      
+      
+      <Card.Header><b><FcApproval/>Made by: </b><a target="_blank" style={{ color: "white" }}href="https://github.com/gurkiratsinghofficial">Gurkirat Singh</a></Card.Header>
+      </Card>
+      <ScrollUpButton />
 
     </div>
   );
