@@ -13,7 +13,7 @@ class Ctable extends Component {
         //console.log("Props",this.props);
         console.log("Hello",state,districts.data[state]);
         return (
-            <Table striped  hover size="sm" responsive style={{ margin: "0px",padding:"0px" }}>
+            <Table striped bordered hover size="sm" responsive style={{ margin: "0px",padding:"0px" }}>
         <small>
             <thead>
               <tr style={{background:"light"}}>
