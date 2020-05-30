@@ -20,7 +20,7 @@ class Ctable extends Component {
               <th>District</th>
                 <th>Active</th>
                 <th>Cases</th>
-                <th>Recovered</th>
+                
                 <th>Deaths</th>
               </tr>
               {
@@ -35,7 +35,7 @@ class Ctable extends Component {
                              districts.data[state].districtData[value].delta.confirmed !==0 ?  <Badge pill variant="warning"><small><i className="fas fa-arrow-up"/></small>{ districts.data[state].districtData[value].delta.confirmed}</Badge>:<></>
                         }
                             {districts.data[state].districtData[value].confirmed}</td>
-                        <td>{districts.data[state].districtData[value].recovered}</td>
+                        
                         <td>{districts.data[state].districtData[value].deceased}</td>
                               </tr>
                     )
