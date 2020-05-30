@@ -19,7 +19,8 @@
     "react-modal": "^3.11.2",
     "react-moment": "^0.9.7",
     "react-scripts": "3.4.1",
-    "react-scroll-up-button": "^1.6.4"
+    "react-scroll-up-button": "^1.6.4",
+    "react-search-box": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

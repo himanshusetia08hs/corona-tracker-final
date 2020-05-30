@@ -9,7 +9,7 @@ class Navi extends Component {
             <div>
                 <Navbar bg="black" variant="dark" className="text-center">
     <Navbar.Brand href="#home">
-    <FcMindMap/>{' '}
+    <img width="41ch" src="logomain.png"/>{' '}
       COV-19 Tracker
     </Navbar.Brand>
     

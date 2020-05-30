@@ -12,7 +12,7 @@ import { FcGlobe } from "react-icons/fc";
 import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
 import Badge from 'react-bootstrap/Badge'
 import Accordion from 'react-bootstrap/Accordion'
-import Table from 'react-bootstrap/Table'
+import Ctable from './components/Ctable';
 
 
 
@@ -22,7 +22,8 @@ function App() {
   const[india,setIndia]=useState([])
   const[results,setResults]=useState([])
   const[searchStates,setSearchStates]=useState("")
-  const[districts,setDistricts]=useState([])
+  const[loading,setLoading]=useState(true)
+  const[districts,setDistricts]=useState()
   
   
 
@@ -39,15 +40,18 @@ function App() {
           setLatest(responseArr[0].data)
           setResults(responseArr[1].data.statewise)
           setIndia(responseArr[2].data)
-          console.log(responseArr[3].data)
-
+          setLoading(false)
+          setDistricts(responseArr[3]);
         })
         .catch(err=>{
           console.log("error");
         });
   },[]);
 
-  
+  if(loading)
+  {
+    return "Loading";
+  }
   const date=new Date(parseInt(latest.updated))
   const lastUpdated=date.toString();
 
@@ -56,10 +60,10 @@ function App() {
   })
 
   const states= filterStates.map((data,i)=>{
-    if(data.state === "Total"){ 
+    if((data.state === "Total")||(data.state === "State Unassigned")){ 
       return null;
   }
-  else{
+  else if(districts){
       
     return(
       <Card
@@ -76,26 +80,7 @@ function App() {
       <b style={{color:"black"}}>{data.state}</b>
     </Accordion.Toggle>
     <Accordion.Collapse eventKey="0">
-    <Table striped bordered hover size="sm" responsive style={{ margin: "0px",padding:"0px" }}><small>
-  <thead>
-    <tr>
-      <th>Dist</th>
-      <th>active</th>
-      <th>confirmed</th>
-      <th>deaths</th>
-      <th>recovered</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <tr></tr>
-      <td>coming</td>
-      <td>soon</td>
-      <td>!!</td>
-      <td></td>
-    </tr>
-  </tbody>
-</small></Table>
+    <Ctable state={data.state} districts = {districts}/>
     </Accordion.Collapse>
   </Card>
   </Accordion>
@@ -103,7 +88,11 @@ function App() {
         
       
     <Card.Text><b>Active: </b>{data.active}</Card.Text>
-      <Card.Text><Badge pill variant="primary"><small>^{data.deltaconfirmed}</small></Badge><b>Confirmed: </b>{data.confirmed}</Card.Text>
+      <Card.Text>
+        {
+          data.deltaconfirmed != 0 ?  <Badge pill variant="primary"><small><i className="fas fa-arrow-up"/> {data.deltaconfirmed}</small></Badge>:<></>
+        }
+          <b>Confirmed: </b>{data.confirmed}</Card.Text>
       <Card.Text><b>Deceased: </b>{data.deaths}</Card.Text>
       <Card.Text><b>Recovered: </b>{data.recovered}</Card.Text>
       </Card.Body>
@@ -130,7 +119,11 @@ function App() {
   <Card bg="warning" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.cases}</Card.Title>
-  <Card.Title ><b  style={{color:"black"}}>IND{' '}</b>{india.cases}</Card.Title>
+  <Card.Title ><b  style={{color:"black"}}><img width="25ch" src="india.png"/>{' '}</b>
+  {
+        india.todayCases !==0 ?  <Badge pill variant="danger"><small><i className="fas fa-arrow-up"/></small>{india.todayCases}</Badge>:<></>
+  }
+  {india.cases}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Cases</b>
@@ -139,7 +132,7 @@ function App() {
   <Card bg="danger" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.deaths}</Card.Title>
-      <Card.Title><b  style={{color:"black"}}>IND{' '}</b>{india.deaths}</Card.Title>
+      <Card.Title><b  style={{color:"black"}}><img width="25ch" src="india.png"/>{' '}</b>{india.deaths}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Deceased</b>
@@ -148,7 +141,7 @@ function App() {
   <Card bg="success" text="white" className="text-center" style={{margin:"10px"}}>
     <Card.Body>
       <Card.Title><FcGlobe/>{' '}{latest.recovered}</Card.Title>
-      <Card.Title><b style={{color:"black"}}>IND{' '}</b>{india.recovered}</Card.Title>
+      <Card.Title><b style={{color:"black"}}><img width="25ch" src="india.png"/>{' '}</b>{india.recovered}</Card.Title>
     </Card.Body>
     <Card.Footer>
         <b>Recovered</b>
@@ -159,7 +152,7 @@ function App() {
 
 <Form>
   <Form.Group controlId="formGroupSearch" > 
-    <Form.Control type="email" placeholder="Search a state..."  onChange={e => setSearchStates(e.target.value)}/> 
+    <Form.Control type="text" placeholder="Search a state..."  onChange={e => setSearchStates(e.target.value)}/> 
   </Form.Group>
 </Form>
 
