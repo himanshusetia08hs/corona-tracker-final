@@ -122,7 +122,7 @@ function App() {
       <Card.Title><FcGlobe/>{' '}{latest.cases}</Card.Title>
   <Card.Title ><b  style={{color:"black"}}><img width="25ch" src="india.png"/>{' '}</b>
   {
-        india.todayCases !==0 ?  <Badge pill variant="danger"><small><i className="fas fa-arrow-up"/></small>{india.todayCases}</Badge>:<></>
+        india.todayCases !==0 ?  <Badge pill variant="danger"><small><i className="fas fa-arrow-up"/>{india.todayCases} </small> </Badge>:<></>
   }
   {india.cases}</Card.Title>
     </Card.Body>
