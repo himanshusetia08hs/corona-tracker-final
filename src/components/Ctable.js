@@ -17,7 +17,7 @@ class Ctable extends Component {
         <small>
             <thead>
               <tr>
-              <th>District</th>
+              <th>#</th>
                 <th>Active</th>
                 <th>Cases</th>
                 
