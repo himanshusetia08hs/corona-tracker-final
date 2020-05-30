@@ -16,6 +16,7 @@ import Ctable from './components/Ctable';
 
 
 
+
 function App() {
 
   const[latest,setLatest]=useState([])
@@ -153,8 +154,10 @@ function App() {
 <Form>
   <Form.Group controlId="formGroupSearch" > 
     <Form.Control type="text" placeholder="Search a state..."  onChange={e => setSearchStates(e.target.value)}/> 
+    <small style={{color:"white"}}>{' '}[Tap on state to see district data]</small>
   </Form.Group>
 </Form>
+
 
 
   <Columns queries={queries}>{states}</Columns>

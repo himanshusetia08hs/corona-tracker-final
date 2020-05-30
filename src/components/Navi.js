@@ -9,8 +9,8 @@ class Navi extends Component {
             <div>
                 <Navbar bg="black" variant="dark" className="text-center">
     <Navbar.Brand href="#home">
-    <img width="39ch" src="logomain.png"/>{' '}
-      <big>COVID-19 Tracker</big>
+    <img width="28ch" src="logomain.png"/>{'   '}
+      COVID-19 Tracker
     </Navbar.Brand>
     
   </Navbar>
