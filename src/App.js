@@ -78,7 +78,7 @@ function App() {
       <Accordion >
   <Card >
     <Accordion.Toggle as={Card.Header} eventKey="0" >
-      <b style={{color:"black"}}>{data.state}</b>
+    <b style={{color:"black"}}>{data.state}{" "}<img width="20ch" src="info.png"/></b>
     </Accordion.Toggle>
     <Accordion.Collapse eventKey="0">
     <Ctable state={data.state} districts = {districts}/>
@@ -103,7 +103,7 @@ function App() {
 
   var queries = [{
     columns: 2,
-    query: 'min-width: 500px'
+    query: 'min-width: 400px'
   }, {
     columns: 3,
     query: 'min-width: 870px'
@@ -122,7 +122,7 @@ function App() {
       <Card.Title><FcGlobe/>{' '}{latest.cases}</Card.Title>
   <Card.Title ><b  style={{color:"black"}}><img width="25ch" src="india.png"/>{' '}</b>
   {
-        india.todayCases !==0 ?  <Badge pill variant="danger"><small><i className="fas fa-arrow-up"/>{india.todayCases} </small> </Badge>:<></>
+        india.todayCases !==0 ?  <Badge pill variant="danger"><small><i className="fas fa-arrow-up"/>{india.todayCases}</small></Badge>:<></>
   }
   {india.cases}</Card.Title>
     </Card.Body>
@@ -154,7 +154,7 @@ function App() {
 <Form>
   <Form.Group controlId="formGroupSearch" > 
     <Form.Control type="text" placeholder="Search a state..."  onChange={e => setSearchStates(e.target.value)}/> 
-    <small style={{color:"white"}}>{' '}[Tap on state to see district data]</small>
+    <small style={{color:"white"}}>{' '}[Tap on state for district details]</small>
   </Form.Group>
 </Form>
 
