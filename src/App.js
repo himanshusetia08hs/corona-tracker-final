@@ -171,7 +171,7 @@ function App() {
     >
       
       
-      <Card.Header><b><FcApproval/>Developed by: </b><a target="_blank" style={{ color: "white" }}href="https://github.com/gurkiratsinghofficial">Gurkirat Singh</a></Card.Header>
+      <Card.Header><b><FcApproval/>Developed by: </b><a target="_blank" style={{ color: "white" }}href="https://github.com/gurkiratsinghofficial">Gurkirat Singh</a> <a target="_blank" style={{ color: "white" }}href="https://github.com/Gaganpreetoberoi"> Gaganpreet singh Oberoi</a> </Card.Header>
       </Card>
       <ScrollUpButton />
 
